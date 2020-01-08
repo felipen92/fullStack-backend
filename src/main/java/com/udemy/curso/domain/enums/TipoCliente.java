@@ -1,5 +1,10 @@
 package com.udemy.curso.domain.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum TipoCliente {
 	
 	PESSOAFISICA (1, "Pessoa Física"),
@@ -9,12 +14,6 @@ public enum TipoCliente {
 	
 	private String descricao;
 
-	private TipoCliente(int cod, String descricao) {
-		this.cod = cod;
-		this.descricao = descricao;
-	}
-	
-	
 	public static TipoCliente toEnum(Integer cod) {
 		if (cod == null) {
 			return null;
@@ -29,18 +28,5 @@ public enum TipoCliente {
 		throw new IllegalArgumentException("Id inválido: " + cod);
 	}
 
-	public int getCod() {
-		return cod;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	
-
-
-	
-	
 
 }
