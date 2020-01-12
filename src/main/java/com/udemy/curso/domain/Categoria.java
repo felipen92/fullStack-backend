@@ -13,9 +13,11 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Categoria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +31,7 @@ public class Categoria implements Serializable {
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>();
 	
-
+	
 	public Categoria(Integer id, String nome) {
 		super();
 		this.id = id;

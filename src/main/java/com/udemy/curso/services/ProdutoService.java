@@ -14,7 +14,7 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository repo;
 	
-	public Produto findById(Integer id) {
+	public Produto buscarPorId(Integer id) {
 		
 		Optional<Produto> obj = repo.findById(id);
 		

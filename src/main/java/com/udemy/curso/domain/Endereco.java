@@ -9,10 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Endereco  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -25,6 +29,7 @@ public class Endereco  implements Serializable {
 	private String bairro;
 	private String cep;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
@@ -44,7 +49,7 @@ public class Endereco  implements Serializable {
 		this.bairro = bairro;
 		this.cep = cep;
 		this.cliente = cliente;
-		this.setCidade(cidade);
+		this.cidade = cidade;
 	}
 
 }

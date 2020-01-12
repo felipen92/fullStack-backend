@@ -7,21 +7,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.udemy.curso.domain.Produto;
-import com.udemy.curso.services.ProdutoService;
+import com.udemy.curso.domain.Estado;
+import com.udemy.curso.services.EstadoService;
 
 
 @RestController
-@RequestMapping(value = "/produtos")
-public class ProdutoResource {
+@RequestMapping(value = "/estados")
+public class EstadoResource {
 	
 	@Autowired
-	private ProdutoService service;
+	private EstadoService service;
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
 		
-		Produto obj = service.buscarPorId(id);
+		Estado obj = service.buscarPorId(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}

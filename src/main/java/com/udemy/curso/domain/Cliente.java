@@ -14,12 +14,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.udemy.curso.domain.enums.TipoCliente;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,12 +34,16 @@ public class Cliente implements Serializable {
 	private String cpfOrCnpf;
 	private Integer tipo;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name = "Telefone")
 	private Set<String> telefones = new HashSet<>();
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente(Integer id, String nome, String email, String cpfOrCnpf, TipoCliente tipo) {
 		super();
