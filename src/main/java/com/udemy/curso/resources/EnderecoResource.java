@@ -19,7 +19,7 @@ public class EnderecoResource {
 	private EnderecoService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Endereco> buscarPorId(@PathVariable Integer id) {
 		
 		Endereco obj = service.buscarPorId(id);
 		

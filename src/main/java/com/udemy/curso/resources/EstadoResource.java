@@ -19,7 +19,7 @@ public class EstadoResource {
 	private EstadoService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Estado> buscarPorId(@PathVariable Integer id) {
 		
 		Estado obj = service.buscarPorId(id);
 		

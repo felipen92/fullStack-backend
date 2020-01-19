@@ -19,7 +19,7 @@ public class CidadeResource {
 	private CidadeService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Cidade> buscarPorId(@PathVariable Integer id) {
 		
 		Cidade obj = service.buscarPorId(id);
 		
