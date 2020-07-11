@@ -33,28 +33,32 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+
 	@PostMapping
-	public ResponseEntity<Void> inserirCategoria(@RequestBody Categoria obj){
+	public ResponseEntity<Void> inserirCategoria(@RequestBody Categoria cat){
 		
-		obj = service.inserirCategoria(obj);
+		cat = service.inserirCategoria(cat);
 		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(obj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cat.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> atualizarCategoria(@PathVariable Integer id, @RequestBody Categoria obj){
-		obj.setId(id);
-		obj = service.atualizarCategoria(obj);
+	public ResponseEntity<Void> atualizarCategoria(@PathVariable Integer id, @RequestBody Categoria cat){
+		
+		cat.setId(id);
+		cat = service.atualizarCategoria(cat);
+		
 		
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deletarPorId(@PathVariable Integer id){
-		service.deletarPorId(id);
+	public ResponseEntity<Void> apagarCategoria(@PathVariable Integer id) {
+		
+		service.apagarCategoria(id);
+		
 		return ResponseEntity.noContent().build();
 	}
 }

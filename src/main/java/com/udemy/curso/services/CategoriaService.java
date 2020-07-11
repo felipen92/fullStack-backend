@@ -13,36 +13,39 @@ import com.udemy.curso.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
-	
+
 	@Autowired
 	private CategoriaRepository repo;
-	
+
 	public Categoria buscarPorId(Integer id) {
-		
+
 		Optional<Categoria> obj = repo.findById(id);
-		
-		return obj.orElseThrow(() -> 
-		new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
-	}
-	
-	public Categoria inserirCategoria(Categoria obj) {
-		return repo.save(obj);
-	}
-	
-	public Categoria atualizarCategoria(Categoria obj) {
-		buscarPorId(obj.getId());
-		return repo.save(obj);
+
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 
-	public void deletarPorId(Integer id) {
+	public Categoria inserirCategoria(Categoria cat) {
+		return repo.save(cat);
+	}
+
+	public Categoria atualizarCategoria(Categoria cat) {
+
+		buscarPorId(cat.getId());
+
+		return repo.save(cat);
+	}
+	
+	public void apagarCategoria(Integer id) {
 		buscarPorId(id);
-		try {
-			repo.deleteById(id);
-		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possivel excluir uma categoria com produtos!");
-			
-		}
 		
+		try {
+			
+			repo.deleteById(id);
+			
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produto!!");
+		}
 		
 	}
 }
