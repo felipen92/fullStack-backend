@@ -19,9 +19,9 @@ public class EstadoResource {
 	private EstadoService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Estado> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Estado> findById(@PathVariable Integer id) {
 		
-		Estado obj = service.buscarPorId(id);
+		Estado obj = service.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}

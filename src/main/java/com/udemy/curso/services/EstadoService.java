@@ -15,7 +15,7 @@ public class EstadoService {
 	@Autowired
 	private EstadoRepository repo;
 	
-	public Estado buscarPorId(Integer id) {
+	public Estado findById(Integer id) {
 		
 		Optional<Estado> obj = repo.findById(id);
 		

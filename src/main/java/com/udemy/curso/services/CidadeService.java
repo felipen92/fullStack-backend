@@ -15,7 +15,7 @@ public class CidadeService {
 	@Autowired
 	private CidadeRepository repo;
 	
-	public Cidade buscarPorId(Integer id) {
+	public Cidade findById(Integer id) {
 		
 		Optional<Cidade> obj = repo.findById(id);
 		

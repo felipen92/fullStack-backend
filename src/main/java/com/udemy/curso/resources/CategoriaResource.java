@@ -29,17 +29,17 @@ public class CategoriaResource {
 	private CategoriaService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Categoria> buscarPorId(@PathVariable Integer id) {
+	public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
 		
-		Categoria obj = service.buscarPorId(id);
+		Categoria obj = service.findById(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@GetMapping()
-	public ResponseEntity<List<CategoriaDTO>> buscarTodos(){
+	public ResponseEntity<List<CategoriaDTO>> findAll(){
 		
-		List<Categoria> listCat = service.buscarTodos();
+		List<Categoria> listCat = service.findAll();
 		
 		List<CategoriaDTO> listCatDTO = listCat.stream().map(cat -> new CategoriaDTO(cat)).collect(Collectors.toList());
 		
@@ -48,9 +48,9 @@ public class CategoriaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> inserirCategoria(@RequestBody Categoria cat){
+	public ResponseEntity<Void> createCat(@RequestBody Categoria cat){
 		
-		cat = service.inserirCategoria(cat);
+		cat = service.createCat(cat);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cat.getId()).toUri();
 		
@@ -58,19 +58,19 @@ public class CategoriaResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> atualizarCategoria(@PathVariable Integer id, @RequestBody Categoria cat){
+	public ResponseEntity<Void> updateCat(@PathVariable Integer id, @RequestBody Categoria cat){
 		
 		cat.setId(id);
-		cat = service.atualizarCategoria(cat);
+		cat = service.updateCat(cat);
 		
 		
 		return ResponseEntity.noContent().build();
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> apagarCategoria(@PathVariable Integer id) {
+	public ResponseEntity<Void> deleteCat(@PathVariable Integer id) {
 		
-		service.apagarCategoria(id);
+		service.deleteCat(id);
 		
 		return ResponseEntity.noContent().build();
 	}
