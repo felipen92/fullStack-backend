@@ -8,10 +8,17 @@ do back-end.
 
 Nesse projeto está sendo escrito na linguagem Java com Spring Boot, Hibernate, REST, JWT e MsSQL.
 
+*Ferramentas adicionadas a parte:*
+
+- Lombok
+
+
 
 ### Autoria e Contribuições
 
 Esse projeto está sendo implementado baseado no curso da Udemy com a finalidade de aumentar meu conhecimentos das ferramentas usadas.
+
+E estou adicionando ferramentas para colocar em práticas conhecimentos externos.
 
 
 

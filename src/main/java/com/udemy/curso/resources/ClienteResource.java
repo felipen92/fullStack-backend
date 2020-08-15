@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.udemy.curso.domain.Cliente;
 import com.udemy.curso.domain.dto.ClienteDTO;
+import com.udemy.curso.domain.dto.ClienteNewDTO;
 import com.udemy.curso.services.ClienteService;
 
 
@@ -67,7 +68,7 @@ public class ClienteResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> createCli(@Valid @RequestBody ClienteDTO cliDTO){
+	public ResponseEntity<Void> createCli(@Valid @RequestBody ClienteNewDTO cliDTO){
 		
 		Cliente cli = service.fromDTO(cliDTO);
 		
