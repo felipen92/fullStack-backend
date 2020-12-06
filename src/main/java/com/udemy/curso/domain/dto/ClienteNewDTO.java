@@ -30,6 +30,6 @@ public class ClienteNewDTO implements Serializable {
 	
 	
 	//CIDADE
-	private Integer cidadeID;
+	private Integer cidadeId;
 
 }
