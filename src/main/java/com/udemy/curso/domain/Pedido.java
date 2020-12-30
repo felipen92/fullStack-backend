@@ -16,15 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter @Setter
-@NoArgsConstructor
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -46,9 +39,13 @@ public class Pedido implements Serializable {
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy="id.pedido")
-	private Set<ItemPedido> itens = new HashSet<>();
+	private Set<ItemPedido> itens = new HashSet<>(); 
+	
+	public Pedido() {
+		
+	}
 
 	public Pedido(Integer id, Date dataPedido, Cliente cliente, Endereco enderecoDeEntrega ) {
 		this.id = id;
@@ -60,13 +57,53 @@ public class Pedido implements Serializable {
 	public double getTotal() {
 		double soma = 0.0;
 		
-//		for (ItemPedido ip : itens) {
-//			soma = soma + ip.getSubTotal();
-//		}
+		for (ItemPedido ip : itens) {
+			soma = soma + ip.getSubTotal();
+		}
 		
 		return soma;
 	}
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Date getDataPedido() {
+		return dataPedido;
+	}
+
+	public void setDataPedido(Date dataPedido) {
+		this.dataPedido = dataPedido;
+	}
+
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Endereco getEnderecoDeEntrega() {
+		return enderecoDeEntrega;
+	}
+
+	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
+		this.enderecoDeEntrega = enderecoDeEntrega;
+	}
+
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
@@ -74,6 +111,8 @@ public class Pedido implements Serializable {
 	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
 	}
+	
+
 
 	@Override
 	public int hashCode() {
@@ -99,6 +138,8 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 }
