@@ -21,5 +21,10 @@ Esse projeto está sendo implementado baseado no curso da Udemy com a finalidade
 E estou adicionando ferramentas para colocar em práticas conhecimentos externos.
 
 
+### Anotações
+
+Foi adicionado o "?useTimezone=true&serverTimezone=UTC" no application-dev.properties por causa do fuso horario.
+
+
 
  
