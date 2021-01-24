@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.udemy.curso.domain.ItemPedido;
 import com.udemy.curso.domain.PagamentoComBoleto;
@@ -33,6 +34,9 @@ public class PedidoService {
 	@Autowired
 	private ProdutoService produtoService;
 	
+	@Autowired
+	private ClienteService cliService;
+	
 	
 	public Pedido findById(Integer id) {
 		
@@ -42,9 +46,11 @@ public class PedidoService {
 		new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
 	}
 
+	@Transactional
 	public Pedido insert (Pedido ped) {
 		ped.setId(null);
 		ped.setDataPedido(new Date());
+		ped.setCliente(cliService.findById(ped.getCliente().getId()));
 		ped.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE);
 		ped.getPagamento().setPedido(ped);
 		
@@ -59,11 +65,13 @@ public class PedidoService {
 		
 		for(ItemPedido ip : ped.getItens()) {
 			ip.setDesconto(0.0);
-			ip.setPreco(produtoService.findById(ip.getProduto().getId()).getPreco());
+			ip.setProduto(produtoService.findById(ip.getProduto().getId()));
+			ip.setPreco(ip.getProduto().getPreco());
 			ip.setPedido(ped);
 		}
 		
 		itemPedidoRepository.saveAll(ped.getItens());
+		System.out.println(ped.toString());
 		
 		return ped;
 	}
